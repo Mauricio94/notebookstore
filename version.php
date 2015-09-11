@@ -13,4 +13,4 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->pluginname = "local_notebookstore";
 $plugin->component = "local_notebookstore";
-$plugin->version = 2015090701;
+$plugin->version = 2015091102;

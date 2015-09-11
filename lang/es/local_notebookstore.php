@@ -9,3 +9,23 @@
 
 $string["title"] = "Base de datos de la tienda";
 $string["heading"] = "Bienvenido a la base de datos de su tienda. ¿Que desea hacer?";
+$string["clientsrut"] = "Rut";
+$string["required"] = "Requerido";
+$string["clientsname"] = "Nombre";
+$string["clientslastname"] = "Apellido";
+$string["delete"] = "Borrar";
+$string["deleteclient"] = "¿Esta seguro que desea borrar este cliente?";
+$string["edit"] = "Editar";
+$string["editclient"] = "¿Esta seguro que desea editar la informacion de este cliente?";
+$string["clientstable"] = "La informacion de los clientes";
+$string["notebooksid"] = "id";
+$string["notebookscompany"] = "Compañia";
+$string["notebookscpu"] = "CPU";
+$string["notebooksram"] = "RAM";
+$string["notebooksmemory"] = "Memoria";
+$string["clients"] = "Clientes";
+$string["notebooks"] = "Notebooks";
+$string["receipts"] = "Boletas";
+$string["notebookstable"] = "La informacion de los notebooks";
+$string["deletenotebook"] = "¿Esta seguro que desea editar la informacion de este notebook?";
+$string["editnotebooks"] = "¿Esta seguro que desea editar la informacion de este notebook?";

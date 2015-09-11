@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/notebookstore/db" VERSION="20150907" COMMENT="XMLDB file for Moodle local/notebookstore"
+<XMLDB PATH="local/notebookstore/db" VERSION="20150909" COMMENT="XMLDB file for Moodle local/notebookstore"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="notebooks" COMMENT="Here you can find your notebooks information">
+    <TABLE NAME="notebooks" COMMENT="Here you can find the information on your notebooks">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="company" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -16,7 +16,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="clients" COMMENT="Here you can find the information from the clients">
+    <TABLE NAME="clients" COMMENT="Here you can find the information on your clients">
       <FIELDS>
         <FIELD NAME="rut" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="name" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -26,11 +26,11 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="rut"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="receipt" COMMENT="Here you'll find the information from your receipts">
+    <TABLE NAME="receipts" COMMENT="Here you can find the information on your receipts">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="clientsrut" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="notebooksid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="clientsrut" TYPE="int" LENGTH="8" NOTNULL="true" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
