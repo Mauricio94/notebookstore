@@ -40,33 +40,33 @@ if( $action == "view" ){
 	if( count($clients) >0 ){
 		$clientstable->head = array(
 				get_string("receiptsid", "local_notebookstore"),
-				get_string("receipts", "local_notebookstore"),
-				get_string("clientslastname", "local_notebookstore")
+				get_string("notebooksid", "local_notebookstore"),
+				get_string("clientsrut", "local_notebookstore")
 		);
 	
-		foreach ($clients as $client){
-			$deleteurl_clients = new moodle_url("/local/notebookstore/index.php", array(
+		foreach ($receipts as $receipt){
+			$deleteurl_receipt = new moodle_url("/local/notebookstore/receipts.php", array(
 					"action" => "delete",
-					"rutclients" => $clients->rut,
+					"idreceipts" => $receipts->id,
 					"sesskey" => sesskey()
 			));
-			$deleteicon_clients = new pix_icon("t/delete", get_string("delete", "local_notebookstore")); 
-			$deleteaction_clients = $OUTPUT->action_icon(
-					$deleteurl_clients,
-					$deleteicon_clients, 
-					new confirm_action(get_string("deleteclient", "local_notebookstore")
+			$deleteicon_receipt = new pix_icon("t/delete", get_string("delete", "local_notebookstore")); 
+			$deleteaction_receipt = $OUTPUT->action_icon(
+					$deleteurl_receipt,
+					$deleteicon_receipt, 
+					new confirm_action(get_string("deletereceipt", "local_notebookstore")
 			));
 			
-			$editurl_clients = new moodle_url("/local/notebookstore/index.php", array(
+			$editurl_receipt = new moodle_url("/local/notebookstore/receipt.php", array(
 					"action"=> "edit",
-					"rutclients" => $clients->rut,
+					"idreceipt" => $receipt->id,
 					"sesskey" => sesskey()
 			));
 			$editicon_clients = new pix_icon("i/edit", get_string("edit", "local_notebookstore"));
 			$editaction_clients = $OUTPUT->action_icon(
 					$editurl_clients, 
 					$editicon_clients, 
-					new confirm_action(get_string("editclient", "local_notebookstore")
+					new confirm_action(get_string("editreceipt", "local_notebookstore")
 			));
 	
 			$clientstable->data[] = array(

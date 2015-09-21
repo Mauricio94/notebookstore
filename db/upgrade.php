@@ -79,5 +79,33 @@ if ($oldversion < 2015090905) {
 	upgrade_plugin_savepoint(true, 2015090905, 'local', 'notebookstore');
 }
 
+if ($oldversion < 2015091502) {
+
+        // Define field price to be added to notebooks.
+        $table = new xmldb_table('notebooks');
+        $field = new xmldb_field('price', XMLDB_TYPE_INTEGER, '7', null, null, null, null, 'memory');
+
+        // Conditionally launch add field price.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Notebookstore savepoint reached.
+        upgrade_plugin_savepoint(true, 2015091502, 'local', 'notebookstore');
+}
+
+if ($oldversion < 2015091503) {
+
+	// Changing nullability of field price on table notebooks to not null.
+	$table = new xmldb_table('notebooks');
+	$field = new xmldb_field('price', XMLDB_TYPE_INTEGER, '7', null, XMLDB_NOTNULL, null, null, 'memory');
+
+	// Launch change of nullability for field price.
+	$dbman->change_field_notnull($table, $field);
+
+	// Notebookstore savepoint reached.
+	upgrade_plugin_savepoint(true, 2015091503, 'local', 'notebookstore');
+}
+
 return true;
 }

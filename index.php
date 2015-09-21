@@ -7,6 +7,7 @@
  * @copyright 2015 Mauricio Meza (mameza@alumnos.uai.cl)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+ 
 require_once(dirname(dirname(dirname(__FILE__)))."/config.php");
 //require_once($CFG->dirroot."/local/notebookstore/forms/index_form.php");
 global $DB, $USER, $PAGE, $OUTPUT;
@@ -47,8 +48,7 @@ if( $action == "view" ){
 		foreach ($clients as $client){
 			$deleteurl_clients = new moodle_url("/local/notebookstore/index.php", array(
 					"action" => "delete",
-					"rutclients" => $clients->rut,
-					"sesskey" => sesskey()
+					"rutclients" => $clients->rut
 			));
 			$deleteicon_clients = new pix_icon("t/delete", get_string("delete", "local_notebookstore")); 
 			$deleteaction_clients = $OUTPUT->action_icon(
@@ -59,8 +59,7 @@ if( $action == "view" ){
 			
 			$editurl_clients = new moodle_url("/local/notebookstore/index.php", array(
 					"action"=> "edit",
-					"rutclients" => $clients->rut,
-					"sesskey" => sesskey()
+					"rutclients" => $clients->rut
 			));
 			$editicon_clients = new pix_icon("i/edit", get_string("edit", "local_notebookstore"));
 			$editaction_clients = $OUTPUT->action_icon(
@@ -97,7 +96,7 @@ if( $action == "view" ){
 
 if($action=="view"){
 	
-	echo $OUTPUT->tabtree( $toprow, get_string("clients", "local_notebooks"));
+	echo $OUTPUT->tabtree( $toprow, get_string("clients", "local_notebookstore"));
 	echo get_string("clientstable", "local_notebookstore");
 	echo html_writer::table($clientstable);
 	
