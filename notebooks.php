@@ -19,26 +19,26 @@ if (isguestuser()) {
 
 // Action = { view, edit, delete, create }, all page options
 $action = optional_param("action", "view", PARAM_TEXT);
-$idnotebooks = optional_param("idnotebooks", null, PARAM_INT);
+$idnotebook = optional_param("idnotebook", null, PARAM_INT);
 $sesskey = optional_param("sesskey", null, PARAM_ALPHANUM);
 
 $context = context_system::instance();
 
-$urlindex = new moodle_url("/local/notebookstore/index.php");
+$urlnotebooks = new moodle_url("/local/notebookstore/notebooks.php");
 
 // Page navigation and URL settings
-$PAGE->set_url($urlindex);
+$PAGE->set_url($urlnotebooks);
 $PAGE->set_context($context);
 $PAGE->set_pagelayout("standard");
+
 echo $OUTPUT->header();
 
 if( $action == "add" ){
-	$addform = new notebook_form();
+	$addform = new addnotebook_form();
 	if( $addform->is_cancelled() ){
 		$action = "view";
 	}else if( $creationdata = $addform->get_data() ){
 		$record = new stdClass();
-		$record->id = $creationdata->id;
 		$record->company = $creationdata->company;
 		$record->cpu = $creationdata->cpu;
 		$record->ram = $creationdata->ram;
@@ -50,12 +50,13 @@ if( $action == "add" ){
 }
 
 if( $action == "edit" ){
-	if( $idnotebooks == null ){
+	if( $idnotebook == null ){
 		print_error(get_string("notebookdoesnotexist", "local_notebookstore"));
 		$action = "view";
 	}else{
-		if( $notebook = $DB->get_record("notebooks", array("id"=>$idnotebooks)) ){
-			$editform = new notebook_form();
+		if( $notebook = $DB->get_record("notebooks", array("id"=>$idnotebook)) ){
+			$editform = new editnotebook_form(null, array(
+					"idnotebook" => $idnotebook));
 			
 			$defaultdata = new stdClass();
 			$defaultdata->id = $notebook->id;
@@ -81,11 +82,31 @@ if( $action == "edit" ){
 				$action = "view";
 			}
 		}else{
-			print_error(get_string("printerdoesnotexist", "mod_emarking"));
+			print_error(get_string("notebookdoesnotexist", "local_notebookstore"));
 			$action = "view";
 		}
 	}
 }
+
+if( $action == "delete" ){
+	if( $idnotebooks == null ){
+		print_error(get_string("notebookdoesnotexist", "local_notebookstore"));
+		$action = "view";
+	}else{
+		if( $notebook = $DB->get_record("notebooks", array("id"=>$idnotebooks)) ){
+			if( $sesskey == $USER->sesskey ) {
+				$DB->delete_records("notebooks", array("id"=>$notebook->id));
+				$action = "view";
+			}else{
+				print_error(get_string("usernotloggedin", "local_notebookstore"));
+			}
+		}else{
+			print_error(get_string("notebookdoesnotexist", "local_notebookstore"));
+			$action = "view";
+		}
+	}
+}
+
 
 if( $action == "view" ){
 	$notebooks = $DB->get_records("notebooks");
@@ -101,28 +122,28 @@ if( $action == "view" ){
 		);
 	
 		foreach ($notebooks as $notebook){
-			$deleteurl_clients = new moodle_url("/local/notebookstore/notebooks.php", array(
+			$deleteurl_notebooks = new moodle_url("/local/notebookstore/notebooks.php", array(
 					"action" => "delete",
-					"idnotebooks" => $notebook->id,
+					"idnotebook" => $notebook->id,
 					"sesskey" => sesskey()
 			));
 			$deleteicon_notebooks = new pix_icon("t/delete", get_string("delete", "local_notebookstore"));
 			$deleteaction_notebooks = $OUTPUT->action_icon(
 					$deleteurl_notebooks,
 					$deleteicon_notebooks,
-					new confirm_action(get_string("deletenotebooks", "local_notebookstore")
+					new confirm_action(get_string("deletenotebookconfirmation", "local_notebookstore")
 					));
 	
 			$editurl_notebooks = new moodle_url("/local/notebookstore/notebooks.php", array(
 					"action"=> "edit",
-					"idnotebooks" => $notebook->id,
+					"idnotebook" => $notebook->id,
 					"sesskey" => sesskey()
 			));
 			$editicon_notebooks = new pix_icon("i/edit", get_string("edit", "local_notebookstore"));
 			$editaction_notebooks = $OUTPUT->action_icon(
 					$editurl_notebooks,
 					$editicon_notebooks,
-					new confirm_action(get_string("editnotebooks", "local_notebookstore")
+					new confirm_action(get_string("editnotebooksconfirmation", "local_notebookstore")
 					));
 	
 			$notebookstable->data[] = array(
@@ -174,8 +195,9 @@ if( $action == "edit" ){
 if($action=="view"){
 	$PAGE->set_title(get_string("title", "local_notebookstore"));
 	$PAGE->set_heading(get_string("heading", "local_notebookstore"));
+	echo $OUTPUT->heading(get_string("heading", "local_notebookstore"));
 	echo $OUTPUT->tabtree( $toprow, get_string("notebooks", "local_notebookstore"));
-	echo get_string("notebookstable", "local_notebookstore");
+	echo get_string("notebooksinformation", "local_notebookstore");
 	echo html_writer::table($notebookstable);
 	echo html_writer::nonempty_tag("div", $OUTPUT->single_button($buttonurl, get_string("addnotebook", "local_notebookstore")), array("align" => "center"));
 	

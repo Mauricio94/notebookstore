@@ -7,35 +7,47 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string["title"] = "Store DataBase";
-$string["heading"] = "Welcome to your store database. What do you need?";
-$string["clientsrut"] = "Rut";
-$string["required"] = "Required";
-$string["clientsname"] = "Name";
-$string["clientslastname"] = "Last Name";
-$string["delete"]= "Delete";
-$string["deleteclient"] = "Are you sure you want to delete this client?";
+//General strings
+$string["delete"] = "Delete";
 $string["edit"] = "Edit";
-$string["editclient"] = "Are you sure you want to edit the information on this client?";
-$string["clientstable"] = "The information on your clients";
-$string["notebooksid"] = "id";
+$string["emptyform"] = "You have to fill the field";
+$string["heading"] = "Welcome to your store database. What do you need?";
+$string["required"] = "Required";
+$string["title"] = "Store Database";
+$string["usernotloggedin"] = "No user connected";
+
+//Clients Strings
+
+$string["addclient"] = "Add client";
+$string["clientdoesnotexist"] = "The client does not exist";
+$string["clients"] = "Clients";
+$string["clientsinformation"] = "The information on the clients";
+$string["clientslastname"] = "Last Name";
+$string["clientsname"] = "Name";
+$string["clientsrut"] = "Rut";
+$string["deleteclientconfirmation"] = "Are you sure you want to delete this client?";
+$string["editclient"] = "Edit client";
+$string["editclientconfirmation"] = "Are you sure you want to edit this client?";
+
+
+//Notebooks Strings
+$string["addnotebook"] = "Add notebook";
+$string["deletenotebookconfirmation"] = "Are you sure you want to delete this notebook?";
+$string["editnotebook"] = "Edit notebook";
+$string["editnotebooksconfirmation"] = "Are you sure you want to edit this notebook?";
+$string["notebookdoesnotexist"] = "The notebook does not exist";
+$string["notebooks"] = "Notebooks";
 $string["notebookscompany"] = "Company";
 $string["notebookscpu"] = "CPU";
-$string["notebooksram"] = "RAM";
+$string["notebooksid"] = "id";
+$string["notebooksinformation"] = "The information on the notebooks";
 $string["notebooksmemory"] = "Memory";
-$string["clients"] = "Clients";
-$string["notebooks"] = "Notebooks";
-$string["receipts"] = "Receipts";
-$string["notebookstable"] = "The information on the notebooks";
-$string["deletenotebook"] = "Are you sure you want to delete the information on this notebook?";
-$string["editnotebooks"] = "Are you sure you want to edit the information on this notebook?";
-$string["receiptsid"] ="id";
-$string["deletereceipt"] = "Are you sure you want to delete the information on this receipt?";
-$string["editreceipt"] = "Are you sure you want to edit the information on this receipt?";
 $string["notebooksprice"] = "Price";
-$string["notebookdoesnotexist"] = "The notebook does not exist";
-$string["clientdoesnotexist"] = "The client does not exist";
+$string["notebooksram"] = "RAM";
+
+//Receipts Strings
 $string["receiptdoesnotexist"] = "The receipt does not exist";
-$string["emptyfield"] = "You have to fill the field";
-$string["addnotebook"] = "Add notebook";
-$string["editnotebook"] = "Edit notebook";
+$string["receipts"] = "Receipt";
+$string["receiptsid"] ="id";
+$string["deletereceipt"] ="Are you sure you want to delete this receipt?";
+$string["editreceipt"] ="Are you sure you want to edit this receipt?";
