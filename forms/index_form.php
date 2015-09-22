@@ -28,6 +28,9 @@ class addclient_form extends moodleform {
         $mform->setType("lastname", PARAM_TEXT);
         $mform->addRule("lastname", get_string("required", "local_notebookstore") ,"required",  null, "client");
     
+        $mform->addElement ("hidden", "action", "add");
+        $mform->setType ("action", PARAM_TEXT);
+        
         $this->add_action_buttons(true);
     }
     
@@ -56,6 +59,9 @@ class editclient_form extends moodleform {
 	public function definition() {
 		global $CFG;
 		$mform = $this->_form;
+		$instance = $this->_customdata;
+		
+		$rutclient = $instance["rutclient"];
 
 		$mform->addElement("text", "rut", get_string("clientsrut", "local_notebookstore"));
 		$mform->setType("rut", PARAM_INT);
@@ -68,6 +74,11 @@ class editclient_form extends moodleform {
 		$mform->addElement("text", "lastname", get_string("clientslastname", "local_notebookstore"));
 		$mform->setType("lastname", PARAM_TEXT);
 		$mform->addRule("lastname", get_string("required", "local_notebookstore") ,"required",  null, "client");
+
+		$mform->addElement ("hidden", "action", "edit");
+        $mform->setType ("action", PARAM_TEXT);
+        $mform->addElement("hidden", "rutclient", $rutclient);
+        $mform->setType("rutclient", PARAM_INT);
 
 		$this->add_action_buttons(true);
 	}
@@ -91,6 +102,7 @@ class editclient_form extends moodleform {
 		}
 	}
 }
+
 
 class addnotebook_form extends moodleform {
 

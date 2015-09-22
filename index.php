@@ -81,11 +81,11 @@ if( $action == "edit" ){
 }
 
 if( $action == "delete" ){
-	if( $idclients == null ){
+	if( $rutclient == null ){
 		print_error(get_string("clientdoesnotexist", "local_notebookstore"));
 		$action = "view";
 	}else{
-		if( $client = $DB->get_record("clients", array("rut"=>$rutclients)) ){
+		if( $client = $DB->get_record("clients", array("rut"=>$rutclient)) ){
 			if( $sesskey == $USER->sesskey ) {
 				$DB->delete_records("clients", array("rut"=>$client->rut));
 				$action = "view";

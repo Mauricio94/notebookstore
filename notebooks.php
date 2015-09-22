@@ -89,11 +89,11 @@ if( $action == "edit" ){
 }
 
 if( $action == "delete" ){
-	if( $idnotebooks == null ){
+	if( $idnotebook == null ){
 		print_error(get_string("notebookdoesnotexist", "local_notebookstore"));
 		$action = "view";
 	}else{
-		if( $notebook = $DB->get_record("notebooks", array("id"=>$idnotebooks)) ){
+		if( $notebook = $DB->get_record("notebooks", array("id"=>$idnotebook)) ){
 			if( $sesskey == $USER->sesskey ) {
 				$DB->delete_records("notebooks", array("id"=>$notebook->id));
 				$action = "view";
