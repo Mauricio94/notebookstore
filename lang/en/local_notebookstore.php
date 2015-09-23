@@ -28,7 +28,7 @@ $string["clientsrut"] = "Rut";
 $string["deleteclientconfirmation"] = "Are you sure you want to delete this client?";
 $string["editclient"] = "Edit client";
 $string["editclientconfirmation"] = "Are you sure you want to edit this client?";
-
+$string["selectclient"] = "Select a client";
 
 //Notebooks Strings
 $string["addnotebook"] = "Add notebook";
@@ -46,8 +46,10 @@ $string["notebooksprice"] = "Price";
 $string["notebooksram"] = "RAM";
 
 //Receipts Strings
+$string["addreceipt"] = "Add receipt";
 $string["receiptdoesnotexist"] = "The receipt does not exist";
 $string["receipts"] = "Receipt";
 $string["receiptsid"] ="id";
-$string["deletereceipt"] ="Are you sure you want to delete this receipt?";
-$string["editreceipt"] ="Are you sure you want to edit this receipt?";
+$string["receiptsinformation"] = "The information on the receipts";
+$string["deletereceiptconfirmation"] ="Are you sure you want to delete this receipt?";
+$string["editreceiptconfirmation"] ="Are you sure you want to edit this receipt?";

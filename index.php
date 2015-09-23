@@ -157,7 +157,7 @@ if( $action == "view" ){
 		);
 		$toprow[] = new tabobject(
 				get_string("receipts", "local_notebookstore"),
-				new moodle_url("/local/notebookstore/recipts.php"),
+				new moodle_url("/local/notebookstore/receipts.php"),
 				get_string("receipts", "local_notebookstore")
 		);
 	}

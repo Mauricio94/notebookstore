@@ -239,3 +239,38 @@ public function definition() {
     	}
     }
 }
+
+class addreceipt_form extends moodleform{
+	function definition(){
+		global $DB;
+		$mform = $this->_form;
+
+		$clients = $DB->get_records("clients", array("id", "name", "lastname"));
+		$data = array();
+		foreach( $clients as $client ){
+			$data[$client->id] = $client->name." ".$client->lastname;
+		}
+		$selectclients = $mform->addElement("select", "clients", get_string("selectclients","local_notebookstore"),$data);
+		$selectclients->setMultiple(true);
+			
+		/**if($printers = $DB->get_records("emarking_printers")){
+			$data = array();
+			foreach( $printers as $printer ){
+				$data[$printer->id] = $printer->name;
+			}
+			$selectprinters = $mform->addElement("select", "printers", get_string("selectprinters","mod_emarking"),$data);
+			$selectprinters->setMultiple(true);
+		}
+		*/	
+		$mform->addElement("hidden", "action", "add");
+		$mform->setType("action", PARAM_TEXT);
+			
+		$this->add_action_buttons(true);
+	}
+	function validation($data, $files){
+		global $DB;
+		$errors = array();
+
+		return $errors;
+	}
+}

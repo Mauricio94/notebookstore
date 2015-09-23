@@ -27,6 +27,7 @@ $string["clientsrut"] = "Rut";
 $string["deleteclientconfirmation"] = "¿Esta seguro que desea borrar este cliente?";
 $string["editclient"] = "Editar cliente";
 $string["editclientconfirmation"] = "¿Esta seguro que desea editar la informacion de este cliente?";
+$string["selectclient"] = "Seleccione un cliente";
 
 //Notebooks Strings
 $string["addnotebook"] = "Agregar notebook";
@@ -44,8 +45,10 @@ $string["notebooksprice"] = "Precio";
 $string["notebooksram"] = "RAM";
 
 //Receipts Strings
+$string["addreceipt"] = "Agregar boleta";
 $string["receiptdoesnotexist"] = "La boleta no existe";
 $string["receipts"] = "Boletas";
 $string["receiptsid"] ="id";
-$string["deletereceipt"] ="¿Esta seguro que desea borrar la informacion de esta boleta?";
-$string["editreceipt"] ="¿Esta seguro que desea editar la informacion de esta boleta?";
+$string["receiptsinformation"] = "La informacion de las boletas";
+$string["deletereceiptconfirmation"] ="¿Esta seguro que desea borrar la informacion de esta boleta?";
+$string["editreceiptconfirmation"] ="¿Esta seguro que desea editar la informacion de esta boleta?";
