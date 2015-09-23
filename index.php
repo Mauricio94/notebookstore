@@ -9,7 +9,7 @@
  */
  
 require_once (dirname(dirname(dirname(__FILE__)))."/config.php");
-require_once ($CFG->dirroot."/local/notebookstore/forms/index_form.php");
+require_once ($CFG->dirroot."/local/notebookstore/forms/index_forms.php");
 global $DB, $USER, $PAGE, $OUTPUT;
 
 require_login();
@@ -17,22 +17,23 @@ if (isguestuser()) {
 	die();
 }
 
-// Action = { view, edit, delete, create }, all page options
+// Optional Parameters
 $action = optional_param("action", "view", PARAM_TEXT);
 $rutclient = optional_param("rutclient", null, PARAM_INT);
 $sesskey = optional_param("sesskey", null, PARAM_ALPHANUM);
 
 $context = context_system::instance();
-
+	
 $urlindex = new moodle_url("/local/notebookstore/index.php");
 
-// Page navigation and URL settings
+// Page specification
 $PAGE->set_url($urlindex);
 $PAGE->set_context($context);
 $PAGE->set_pagelayout("standard");
 
 echo $OUTPUT->header();
 
+//Run of each action
 if( $action == "add" ){
 	$addform = new addclient_form();
 	if( $addform->is_cancelled() ){
@@ -162,7 +163,7 @@ if( $action == "view" ){
 		);
 	}
 }
-
+//Display of each action
 if( $action == "add" ){
 	$PAGE->set_title(get_string("addclient", "local_notebookstore"));
 	$PAGE->set_heading(get_string("addclient", "local_notebookstore"));

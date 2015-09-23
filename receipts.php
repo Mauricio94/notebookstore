@@ -9,7 +9,7 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__)))."/config.php");
-require_once($CFG->dirroot."/local/notebookstore/forms/index_form.php");
+require_once($CFG->dirroot."/local/notebookstore/forms/receipts_forms.php");
 global $DB, $USER, $PAGE, $OUTPUT;
 
 require_login();
@@ -17,7 +17,7 @@ if (isguestuser()) {
 	die();
 }
 
-// Action = { view, edit, delete, create }, all page options
+// Optional Parameters
 $action = optional_param("action", "view", PARAM_TEXT);
 $idreceipt = optional_param("idreceipt", null, PARAM_INT);
 $sesskey = optional_param("sesskey", null, PARAM_ALPHANUM);
@@ -26,13 +26,14 @@ $context = context_system::instance();
 
 $urlreceipts = new moodle_url("/local/notebookstore/receipts.php");
 
-// Page navigation and URL settings
+// Page specifications
 $PAGE->set_url($urlreceipts);
 $PAGE->set_context($context);
 $PAGE->set_pagelayout("standard");
 
 echo $OUTPUT->header();
 
+//Run of each action
 if( $action == "add" ){
 	$addform = new addreceipt_form();
 	if( $addform->is_cancelled() ){
@@ -43,6 +44,33 @@ if( $action == "add" ){
 		$record->notebooksid = $creationdata->notebooksid;
 		$DB->insert_record("receipts", $record);
 		$action = "view";
+	}
+}
+
+if( $action == "edit" ){
+	if( $idreceipt == null ){
+		print_error(get_string("receiptdoesnotexist", "local_notebookstore"));
+		$action = "view";
+	}else{
+		if( $receipt = $DB->get_record("receipts", array("id"=>$idreceipt)) ){
+			$editform = new editreceipt_form(null, array(
+					"idreceipt" => $idreceipt));
+			
+			if( $editform->is_cancelled() ){
+				$action = "view";
+			}
+			else if( $editform->get_data()  && $sesskey == $USER->sesskey ){
+				$record = new stdClass();
+				$record->id = $idreceipt ;
+				$record->clientsrut = $editform->get_data()->clientsrut;
+				$record->notebooksid = $editform->get_data()->notebooksid;
+				$DB->update_record("receipts", $record);
+				$action = "view";
+			}
+		}else{
+			print_error(get_string("receiptdoesnotexist", "local_notebookstore"));
+			$action = "view";
+		}
 	}
 }
 
@@ -67,9 +95,9 @@ if( $action == "delete" ){
 
 if( $action == "view" ){
 	$receipts = $DB->get_records_sql(
-									"SELECT a.id, c.name, c.lastname, a.price
+									"SELECT a.id, c.name, c.lastname, a.notebook, a.price
 									FROM mdl_clients c
-									INNER JOIN (SELECT r.id, r.clientsrut, n.price
+									INNER JOIN (SELECT r.id, r.clientsrut, CONCAT(n.company,' ',n.cpu) AS notebook, n.price
 												FROM mdl_receipts r
             									INNER JOIN mdl_notebooks n
             									WHERE n.id = r.notebooksid) a
@@ -82,6 +110,7 @@ if( $action == "view" ){
 				get_string("receiptsid", "local_notebookstore"),
 				get_string("clientsname", "local_notebookstore"),
 				get_string("clientslastname", "local_notebookstore"),
+				get_string("notebook", "local_notebookstore"),
 				get_string("notebooksprice", "local_notebookstore"),
 		);
 	
@@ -114,6 +143,7 @@ if( $action == "view" ){
 					$receipt->id,
 					$receipt->name,
 					$receipt->lastname,
+					$receipt->notebook,
 					$receipt->price,
 					$deleteaction_receipts.$editaction_receipts
 			);
@@ -140,11 +170,19 @@ if( $action == "view" ){
 	}
 }
 
+//Display of each action
 if( $action == "add" ){
 	$PAGE->set_title(get_string("addreceipt", "local_notebookstore"));
 	$PAGE->set_heading(get_string("addreceipt", "local_notebookstore"));
 	echo $OUTPUT->heading(get_string("addreceipt", "local_notebookstore"));
 	$addform->display();
+}
+
+if( $action == "edit" ){
+	$PAGE->set_title(get_string("editreceipt", "local_notebookstore"));
+	$PAGE->set_heading(get_string("editreceipt", "local_notebookstore"));
+	echo $OUTPUT->heading(get_string("editreceipt", "local_notebookstore"));
+	$editform->display();
 }
 
 if($action=="view"){

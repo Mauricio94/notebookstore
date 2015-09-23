@@ -36,6 +36,7 @@ $string["deletenotebookconfirmation"] = "¿Esta seguro que desea editar la infor
 $string["editnotebook"] = "Editar notebook";
 $string["editnotebooksconfirmation"] = "¿Esta seguro que desea editar la informacion de este notebook?";
 $string["notebookdoesnotexist"] = "El notebook no existe";
+$string["notebook"] = "Notebook";
 $string["notebooks"] = "Notebooks";
 $string["notebookscompany"] = "Compañia";
 $string["notebookscpu"] = "CPU";
@@ -48,6 +49,7 @@ $string["selectnotebooks"] = "Seleccione un notebook";
 
 //Receipts Strings
 $string["addreceipt"] = "Agregar boleta";
+$string["editreceipt"] = "Editar boleta";
 $string["receiptdoesnotexist"] = "La boleta no existe";
 $string["receipts"] = "Boletas";
 $string["receiptsid"] ="id";
