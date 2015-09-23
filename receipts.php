@@ -38,8 +38,10 @@ if( $action == "add" ){
 	if( $addform->is_cancelled() ){
 		$action = "view";
 	}else if( $creationdata = $addform->get_data() ){
-		$selectusers = $creationdata->users;
-		$DB->insert_record("notebooks", $record);
+		$record = new stdClass();
+		$record->clientsrut = $creationdata->clientsrut;
+		$record->notebooksid = $creationdata->notebooksid;
+		$DB->insert_record("receipts", $record);
 		$action = "view";
 	}
 }
@@ -71,7 +73,8 @@ if( $action == "view" ){
 												FROM mdl_receipts r
             									INNER JOIN mdl_notebooks n
             									WHERE n.id = r.notebooksid) a
-									WHERE a.clientsrut = c.rut"
+									WHERE a.clientsrut = c.rut
+									ORDER BY a.id"
 									 );
 	$receiptstable = new html_table();
 	if( count($receipts) >0 ){
@@ -135,6 +138,13 @@ if( $action == "view" ){
 				get_string("receipts", "local_notebookstore")
 		);
 	}
+}
+
+if( $action == "add" ){
+	$PAGE->set_title(get_string("addreceipt", "local_notebookstore"));
+	$PAGE->set_heading(get_string("addreceipt", "local_notebookstore"));
+	echo $OUTPUT->heading(get_string("addreceipt", "local_notebookstore"));
+	$addform->display();
 }
 
 if($action=="view"){

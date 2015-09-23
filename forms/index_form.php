@@ -245,23 +245,27 @@ class addreceipt_form extends moodleform{
 		global $DB;
 		$mform = $this->_form;
 
-		$clients = $DB->get_records("clients", array("id", "name", "lastname"));
-		$data = array();
+		$clients = $DB->get_records("clients");
+		$dataclients = array();
 		foreach( $clients as $client ){
-			$data[$client->id] = $client->name." ".$client->lastname;
+			$dataclients[$client->rut] = $client->name." ".$client->lastname;
 		}
-		$selectclients = $mform->addElement("select", "clients", get_string("selectclients","local_notebookstore"),$data);
-		$selectclients->setMultiple(true);
-			
-		/**if($printers = $DB->get_records("emarking_printers")){
-			$data = array();
-			foreach( $printers as $printer ){
-				$data[$printer->id] = $printer->name;
+		$selectclients = $mform->addElement("select", "clientsrut", get_string("selectclients","local_notebookstore"),$dataclients);
+				
+		$notebooks = $DB->get_records("notebooks");
+		$datanotebooks = array();
+		foreach( $notebooks as $notebook ){
+			$datanotebooks[$notebook->id] = $notebook->company." ".
+			$notebook->cpu." ".
+			get_string("notebooksram", "local_notebookstore")." ".
+			$notebook->ram." ".
+			get_string("gb", "local_notebookstore")." ".
+			get_string("notebooksmemory", "local_notebookstore")." ".
+			$notebook->memory."".
+			get_string("gb", "local_notebookstore");
 			}
-			$selectprinters = $mform->addElement("select", "printers", get_string("selectprinters","mod_emarking"),$data);
-			$selectprinters->setMultiple(true);
-		}
-		*/	
+		$selectnotebooks = $mform->addElement("select", "notebooksid", get_string("selectnotebooks","local_notebookstore"),$datanotebooks);
+		
 		$mform->addElement("hidden", "action", "add");
 		$mform->setType("action", PARAM_TEXT);
 			

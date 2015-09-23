@@ -11,6 +11,7 @@
 $string["delete"] = "Delete";
 $string["edit"] = "Edit";
 $string["emptyform"] = "You have to fill the field";
+$string["gb"] = "GB";
 $string["heading"] = "Welcome to your store database. What do you need?";
 $string["required"] = "Required";
 $string["title"] = "Store Database";
@@ -28,7 +29,7 @@ $string["clientsrut"] = "Rut";
 $string["deleteclientconfirmation"] = "Are you sure you want to delete this client?";
 $string["editclient"] = "Edit client";
 $string["editclientconfirmation"] = "Are you sure you want to edit this client?";
-$string["selectclient"] = "Select a client";
+$string["selectclients"] = "Select a client";
 
 //Notebooks Strings
 $string["addnotebook"] = "Add notebook";
@@ -44,6 +45,7 @@ $string["notebooksinformation"] = "The information on the notebooks";
 $string["notebooksmemory"] = "Memory";
 $string["notebooksprice"] = "Price";
 $string["notebooksram"] = "RAM";
+$string["selectnotebooks"] = "Select a notebook";
 
 //Receipts Strings
 $string["addreceipt"] = "Add receipt";
