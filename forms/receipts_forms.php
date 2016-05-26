@@ -7,6 +7,9 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
  
+require_once(dirname(dirname(dirname(dirname(__FILE__))))."/config.php");
+require_once ($CFG->libdir . "/formslib.php");
+
 class addreceipt_form extends moodleform{
 	function definition(){
 		global $DB;
@@ -28,7 +31,7 @@ class addreceipt_form extends moodleform{
 					$notebook->ram." ".
 					get_string("gb", "local_notebookstore")." ".
 					get_string("notebooksmemory", "local_notebookstore")." ".
-					$notebook->memory."".
+					$notebook->memory." ".
 					get_string("gb", "local_notebookstore");
 		}
 		$selectnotebooks = $mform->addElement("select", "notebooksid", get_string("selectnotebooks","local_notebookstore"),$datanotebooks);
